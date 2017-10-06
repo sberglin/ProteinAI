@@ -22,5 +22,7 @@ loadData = function() {
     data$x7 = as.factor(substr(data$Features, 7, 7))
     data$x8 = as.factor(substr(data$Features, 8, 8))
  
+    data$Features = NULL
+    
     return(data)   
 }
