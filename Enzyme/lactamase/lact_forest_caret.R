@@ -1,3 +1,5 @@
+# This file tested the 'caret' machine learning package for R. It produced weaker models than the default randomForest package, so feel free to ignore it.
+
 # Loading Packages
 library(randomForest)
 library(caret)

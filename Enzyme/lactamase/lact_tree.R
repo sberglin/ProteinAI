@@ -1,3 +1,5 @@
+# This script creates an individual decsion tree for the lactamase data. It is weaker than the Random Forest model, so feel free to ignore it.
+
 # Clearing Workspace and Loading Packages
 library("rpart")
 library("rpart.plot")

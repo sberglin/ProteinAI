@@ -1,3 +1,5 @@
+# Function to load enzyme data
+
 loadData = function() {
     
     # Reading Data

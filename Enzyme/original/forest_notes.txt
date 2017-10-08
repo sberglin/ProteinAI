@@ -1,5 +1,7 @@
 Notes
 
+- Analysis of this data is similar to the analysis of the lactamase data.
+
 - The individual decision tree model suffered from instability. Hence, its ensemble method Random Forest was used.
 
 - mtry was tuned in a different R script, with the optimal value found to be the default value. No other parameters significantly affect the accuracy of the model.

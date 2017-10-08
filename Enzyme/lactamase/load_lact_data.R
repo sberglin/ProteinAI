@@ -1,3 +1,5 @@
+# This function is used to merely load the lactamase data as a data frame with each attribute separate
+
 loadData = function() {
     
     # Reading Data

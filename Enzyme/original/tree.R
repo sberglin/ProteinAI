@@ -1,13 +1,19 @@
+# Creates a decision tree for the original enzyme data.
+
+
 # Clearing Workspace and Loading Packages
 library("rpart")
 library("rpart.plot")
 
+
 # Clearing Variables
 rm(list = ls())
+
 
 # Loading Data
 source("Enzyme/load_data.R")
 data = loadData()
+
 
 # Creating Tree from Test Data
 fit = rpart(
@@ -15,10 +21,11 @@ fit = rpart(
             + x6 + x7 + x8, 
         data = data, 
         method = "class", 
-        control = rpart.control(cp = 0.00001)
-    )
+        control = rpart.control(cp = 0.00001))
+
 
 # Pruning Tree
+
 
 # Finding Range for xerrors
 min.xerror = fit$cptable[
@@ -30,8 +37,7 @@ strongest.model.index = min(which((fit$cptable[ , "xerror"] >= min.xerror - min.
 # Pruning
 pruned.fit = prune(fit,
                    fit$cptable[strongest.model.index,
-                               "CP"]
-            )
+                               "CP"])
 
 # Displaying Output
 prp(fit, main = "unpruned fit")
