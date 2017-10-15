@@ -31,9 +31,7 @@ forest <- function(data) {
                           data = data,
                           subset = 1:nrow(data),
                           mtry = tuned.mtry,
-                          cutoff = class.weights
-                          # TESTING
-                          , parms = list(loss = loss.matrix))
+                          cutoff = class.weights)
     
     return(forest)
     
