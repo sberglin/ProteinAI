@@ -1,12 +1,12 @@
 #### Purpose ####
-# This script creates a tuned Random Forest model for the original enzyme data.
+# This script creates a tuned Random Forest model for the P450 data.
 
 # Loading Functions
-source("Enzyme/functions/load_enzyme_data.R")
-source("Enzyme/functions/rf_enzyme.R")
+source("functions/load_protein_data.R")
+source("functions/rf_protein.R")
 
 # Loading Data
-original.enzyme = load("original/enzyme.txt")
+original.enzyme = load("P450/enzyme.txt")
 
 # Creating Forest
 forest = forest(original.enzyme)

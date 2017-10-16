@@ -8,8 +8,8 @@ library("rpart.plot")
 rm(list = ls())
 
 # Loading Data
-source("lactamase/load_data.R")
-data = loadData()
+source("functions/load_protein_data.R")
+data = load("beta-lactamase/meyer_lactamase.txt")
 
 # Creating Tree from Test Data
 fit = rpart(
@@ -30,14 +30,12 @@ min.xerror.xstd = fit$cptable[
 # Finding Simplest Model with 'Equivalent' Accuracy
 strongest.model.index = min(which((fit$cptable[ , "xerror"] >= min.xerror - min.xerror.xstd) & (fit$cptable[ , "xerror"] <= min.xerror + min.xerror.xstd)))
 # Pruning
-pruned.fit = prune(fit,
-                   fit$cptable[strongest.model.index,
-                               "CP"]
-)
+pruned.fit = prune(fit, fit$cptable[strongest.model.index, "CP"])
 
 # Displaying Output
-prp(fit, main = "unpruned fit")
-prp(pruned.fit, main = "pruned fit")
+prp(fit, main = "unpruned fit", type = 3)
+# Testing
+# prp(pruned.fit, main = "pruned fit")
 cat("\nError Report (Unpruned data)\n")
 printcp(fit)
 cat("\nError Report (Pruned data)\n")

@@ -16,22 +16,14 @@ forest <- function(data) {
     tuning = tuneRF(predictors, responses,
                     stepFactor = 1.5, improve = 0.005,
                     ntreeTry =  500, plot = FALSE, trace = FALSE)
-    tuned.mtry = tuning[which.min(tuning[ , "OOBError"]),
-                        "mtry"]
-    
-    # Determing Class Weighted Vector
-    # Used to prevent overfitting to the dominant class
-    num.0 = sum(responses == "0")
-    num.1 = sum(responses == "1")
-    class.weights = c(num.0 / length(responses),
-                      num.1 / length(responses))
+    tuned.mtry = tuning[which.min(tuning[ , "OOBError"]), "mtry"]
     
     # Contructing Tuned and Weighted Forest
     forest = randomForest(Functionality ~ .,
                           data = data,
                           subset = 1:nrow(data),
                           mtry = tuned.mtry,
-                          cutoff = class.weights)
+                          cutoff = c(0.1, 0.9))
     
     return(forest)
     

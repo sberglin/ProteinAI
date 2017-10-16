@@ -6,11 +6,11 @@
 rm(list = ls())
 
 # Loading Functions
-source("Enzyme/functions/load_enzyme_data.R")
-source("Enzyme/functions/rf_enzyme.R")
+source("functions/load_protein_data.R")
+source("functions/rf_protein.R")
 
 # Loading Data
-lactamase = load("lactamase/meyer_lactamase.txt")
+lactamase = load("beta-lactamase/meyer_lactamase.txt")
 
 # Creating Forest
 forest = forest(lactamase)

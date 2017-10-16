@@ -9,7 +9,7 @@
 load <- function(path) {
     
     # Intially Reading Data
-    full.path = paste("Enzyme/", path, sep = "")
+    full.path = paste("datasets/", path, sep = "")
     data = read.csv(full.path, header = FALSE,
                     col.names = c("Features", "Functionality"),
                     colClasses = c("character", "integer"))
