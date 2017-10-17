@@ -8,3 +8,19 @@ data = load("beta-lactamase/meyer_lactamase.txt")
 # Gathering Training and Test Data
 indices = list(train = sample(1:nrow(data), nrow(data) - 100))
 indices$test = !(1:nrow(data) %in% indices$train)
+
+# Creating Model
+log.model.raw = glm(formula = Functionality ~ ., data = data[indices$train, ], family = binomial(link = "logit"))
+
+# Displaying Model
+print(log.model.raw)
+
+
+# # Calculating Accuracy
+# predictions.percents = 
+#     predict(log.model, data[indices$test, 2:9], type = "response")
+# predictions.discrete = predictions.percents >= 0.5
+# accuracy = 
+#     sum(predictions.discrete == (data[indices$test, "Functionality"] == "1"
+#                                  )) / length(predictions.discrete)
+# rm(predictions.discrete, predictions.percents)
