@@ -23,7 +23,5 @@ predictions.percents = predict(log.model,
                                data[indices$test, 2:9], 
                                type = "response")
 predictions.discrete = predictions.percents >= 0.5
-accuracy = sum(predictions.discrete == (data[indices$test, "Functionality"]
-                                        == "1")) / length(
-                                        predictions.discrete)
+accuracy = sum(predictions.discrete == (data[indices$test, "Functionality"] == "1")) / length(predictions.discrete)
 rm(predictions.discrete, predictions.percents)
