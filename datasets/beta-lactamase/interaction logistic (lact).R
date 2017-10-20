@@ -11,13 +11,14 @@ indices$test = !(1:nrow(data) %in% indices$train)
 
 
 # Creating Model
-log.model = glm(formula = Functionality ~ (x1 + x2 + x3)^2 + x4 + x5 + x6 + x7 + x8,
+log.model = glm(formula = Functionality ~ (x1 + x2)^2 + x3 + x4 + x5 + x6 + x7 + x8,
                 data = data[indices$train, ],
                 family = binomial(link = "logit"))
 
 
 
 # Displaying Model
+cat("Logistic Regression with Pairwise Interaction")
 print(summary(log.model))
 cat("Number of Coefficients:", length(log.model$coefficients))
 

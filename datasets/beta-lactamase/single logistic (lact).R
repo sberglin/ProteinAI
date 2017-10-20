@@ -15,6 +15,7 @@ log.model = glm(formula = Functionality ~ .,
                 family = binomial(link = "logit"))
 
 # Displaying Model
+cat("Single Logistic Regression")
 print(summary(log.model))
 
 

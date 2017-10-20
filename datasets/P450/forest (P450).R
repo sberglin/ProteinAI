@@ -9,7 +9,7 @@ source("functions/rf_protein.R")
 original.enzyme = load("P450/enzyme.txt")
 
 # Creating Forest
-forest = forest(original.enzyme)
+forest = create.forest(original.enzyme)
 
 # Displaying Output
 plot(forest, main = "Error Rates vs Number of Trees")

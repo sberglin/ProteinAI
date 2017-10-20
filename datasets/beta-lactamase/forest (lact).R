@@ -13,7 +13,7 @@ source("functions/rf_protein.R")
 lactamase = load("beta-lactamase/meyer_lactamase.txt")
 
 # Creating Forest
-forest = forest(lactamase)
+forest = create.forest(lactamase)
 
 # Displaying Output
 plot(forest, main = "Error Rates vs Number of Trees")
