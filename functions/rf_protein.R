@@ -6,17 +6,18 @@
 
 library(randomForest)
 
-create.forest <- function(data) {
+create.forest <- function(data, adjusted.cutoff) {
     
     # Finding optimal parameters
-    
+ 
     # Tuning mtry
     responses = data$Functionality
     predictors = data[ , -which(names(data) == "Functionality")]
-    tuning = tuneRF(predictors, responses,
-                    stepFactor = 1.5, improve = 0.005,
-                    ntreeTry =  500, plot = FALSE,
-                    trace = FALSE)
+    tuning = invisible(
+        tuneRF(predictors, responses,
+    stepFactor = 1.5, improve = 0.005,
+               ntreeTry =  500, plot = FALSE,
+               trace = FALSE))
     tuned.mtry = tuning[which.min(tuning[ , "OOBError"]), "mtry"]
     
     # Contructing Tuned and Weighted Forest
@@ -24,7 +25,8 @@ create.forest <- function(data) {
                           data = data,
                           subset = 1:nrow(data),
                           mtry = tuned.mtry,
-                          cutoff = c(0.1, .9))
+                          cutoff = c(adjusted.cutoff,
+                                     1 - adjusted.cutoff))
     
     return(forest)
     
