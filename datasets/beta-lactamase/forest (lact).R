@@ -1,6 +1,8 @@
-
 #### Purpose ####
 # This script creates a Random Forest model for the lactamase data.
+
+#### Notes ####
+# - The final model is both a strong predictor for functionality (producing few false positives) and overall accuracy. This is due to the prevalence of functional enzymes in the data.
 
 # Clearing Workspace
 rm(list = ls())
@@ -14,9 +16,10 @@ lactamase = load("beta-lactamase/meyer_lactamase.txt")
 
 # Adjusted Cutoff
 # (calculated manually using 'cutoff tuning.R')
-cutoff = 0.493
+cutoff = 0.492
 
 # Creating Forest
+cat("Creating Random Forest (beta-lactamase)\n")
 forest = create.forest(lactamase, cutoff)
 
 # Displaying Output
@@ -25,7 +28,8 @@ legend("topright", colnames(forest$err.rate), col = 1:3,
        pch = 15)
 print(forest)
 
-# Displaying Error Ratio
+# Displaying Error Ratio (Ratio of False Negatives to False
+# Postives)
 cat("Error Ratio:",
     forest$confusion[2,3] / forest$confusion[1,3],
     "(False Negatives per False Positive)")

@@ -19,7 +19,7 @@ cat("Single Logistic Regression")
 print(summary(log.model))
 
 
-# Calculating Accuracy
+# Calculating Accuracy (simple holdout of 100 points)
 predictions.percents = predict(log.model, 
                                data[indices$test, 2:9], 
                                type = "response")

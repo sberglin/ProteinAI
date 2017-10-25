@@ -1,5 +1,5 @@
 # Clearing Workspace
-rm(list = ls())
+# rm(list = ls())
 
 # Loading Data
 source("functions/load_protein_data.R")
@@ -11,9 +11,10 @@ indices$test = !(1:nrow(data) %in% indices$train)
 
 
 # Creating Model
-log.model = glm(formula = Functionality ~ (x1 + x2)^2 + x3 + x4 + x5 + x6 + x7 + x8,
-                data = data[indices$train, ],
-                family = binomial(link = "logit"))
+log.model = glm(
+    formula = reformulate(c("~ (x1 + x5)^2 + x2 + x3 + x4 + x6 + x7 + x8")),
+    data = data[indices$train, ],
+    family = binomial(link = "logit"))
 
 
 

@@ -1,5 +1,5 @@
 ##### Purpose ####
-# Loads enzyme data. Data is assumed to be in directory of respective enzyme work. (ex: within '/Research/Enzyme/lactamse' directory)
+# Loads enzyme data. Data is assumed to be in directory of respective enzyme work. (ex: within '/Research/datasets/beta-lactamse' directory)
 
 #### Assumptions ####
 # - Data is in format of "xxxxxxxx, y" (where x's represent attributes and y represents the functionality)
