@@ -2,7 +2,7 @@
 #### Purpose ####
 # This script uses simulations to determine the approximate error ratio given a test cutoff
 
-# Desired ratio: 10.0
+# Desired ratio: ~10.0
 
 # Clearing Workspace
 rm(list = ls())

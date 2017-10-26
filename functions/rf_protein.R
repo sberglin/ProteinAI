@@ -1,9 +1,6 @@
 #### Purpose ####
 # Creates a random forest model using R's randomForest pacakge for enzyme data.
 
-#### Assumptions ####
-# - Data has been loaded through the load_enzyyme_data.R
-
 library(randomForest)
 
 create.forest <- function(data, adjusted.cutoff) {

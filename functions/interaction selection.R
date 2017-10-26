@@ -47,5 +47,7 @@ for (i in 1:ncol(combns)) {
     average.AICs[i] = mean(model.AICs)
 }
 
+print(average.AICs)
+
 # Matching AICs to pairwise combinations
 # combns[3, ] = average.AICs

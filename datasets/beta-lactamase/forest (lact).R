@@ -1,9 +1,6 @@
 #### Purpose ####
 # This script creates a Random Forest model for the lactamase data.
 
-#### Notes ####
-# - The final model is both a strong predictor for functionality (producing few false positives) and overall accuracy. This is due to the prevalence of functional enzymes in the data.
-
 # Clearing Workspace
 rm(list = ls())
 

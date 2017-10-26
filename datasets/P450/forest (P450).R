@@ -1,9 +1,6 @@
 #### Purpose ####
 # This script creates a tuned Random Forest model for the P450 data.
 
-#### Notes ####
-# - While the final model rarely produces false positives (relative to false negatives), it has a much higher overall error rate compared to the beta-lactamase model. This is due to the prevalence of functional enzymes.
-
 # Loading Functions
 source("functions/load_protein_data.R")
 source("functions/rf_protein.R")
