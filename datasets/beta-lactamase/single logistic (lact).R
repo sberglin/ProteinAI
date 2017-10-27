@@ -5,24 +5,17 @@ rm(list = ls())
 source("functions/load_protein_data.R")
 data = load("beta-lactamase/meyer_lactamase.txt")
 
-# Gathering Training and Test Data
-indices = list(train = sample(1:nrow(data), nrow(data) - 100))
-indices$test = !(1:nrow(data) %in% indices$train)
-
 # Creating Model
 log.model = glm(formula = Functionality ~ .,
-                data = data[indices$train, ],
+                data = data,
                 family = binomial(link = "logit"))
 
 # Displaying Model
-cat("Single Logistic Regression")
-print(summary(log.model))
+cat("Single Logistic Regression\n")
+# print(summary(log.model))
+cat("AIC:", log.model$aic, "\n")
+cat("Number of Coefficients:", length(log.model$coefficients), "\n")
 
-
-# Calculating Accuracy (simple holdout of 100 points)
-predictions.percents = predict(log.model, 
-                               data[indices$test, 2:9], 
-                               type = "response")
-predictions.discrete = predictions.percents >= 0.5
-accuracy = sum(predictions.discrete == (data[indices$test, "Functionality"] == "1")) / length(predictions.discrete)
-rm(predictions.discrete, predictions.percents)
+# Displaying Accuracy
+cv = cv.glm(data = data, glmfit = log.model)
+cat("Leave-one-out CV error: ", cv$delta[1], "\n")
