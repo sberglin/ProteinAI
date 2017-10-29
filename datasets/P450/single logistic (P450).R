@@ -3,7 +3,7 @@ rm(list = ls())
 
 # Loading Data
 source("functions/load_protein_data.R")
-data = load("beta-lactamase/meyer_lactamase.txt")
+data = load("P450/enzyme.txt")
 
 # Creating Model
 log.model = glm(formula = Functionality ~ .,

@@ -3,7 +3,7 @@ rm(list = ls())
 
 # Loading Data
 source("functions/load_protein_data.R")
-data = load("beta-lactamase/meyer_lactamase.txt")
+data = load("P450/Enzyme.txt")
 
 # Gathering Possible Combinations
 features = c("x1", "x2", "x3", "x4", "x5", "x6", "x7", "x8")
@@ -34,4 +34,6 @@ for (i in 1:nrow(combns)) {
 }
 
 cat("3 Smallest AIC's:", sort(combns$AIC)[1:3], "\n")
-cat("Smallest AIC Combination:", combns[which.min(combns$AIC), ])
+cat("Smallest AIC Combination:",
+    as.character(combns$var1[which.min(combns$AIC)]),
+    as.character(combns$var2[which.min(combns$AIC)]))

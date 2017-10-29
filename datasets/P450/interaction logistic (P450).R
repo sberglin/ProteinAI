@@ -1,19 +1,19 @@
 #### Purpose ####
-# Create logistic regression model for the beta-lactamase data.
+# Create logistic regression model for the P450 data.
 
 # Clearing Workspace
 rm(list = ls())
 
 # Loading Data
 source("functions/load_protein_data.R")
-data = load("beta-lactamase/meyer_lactamase.txt")
+data = load("P450/Enzyme.txt")
 
 # Creating Model
 log.model = glm(
     # Forumula includes optimal pair to consider, determined from
     # interaction selection.R; hard coded below
-    formula = Functionality ~ (x1 + x8)^2 + x2 + x3 + x4 + x5 
-    + x6 + x7,
+    formula = Functionality ~ (x1 + x7)^2 + x2 + x3 + x4 + x5 
+    + x6 + x8,
     data = data,
     family = binomial(link = "logit"))
 
