@@ -27,3 +27,9 @@ print(forest)
 cat("Error Ratio:",
     forest$confusion[2,3] / forest$confusion[1,3],
     "(False Negatives per False Positive)")
+
+# Triggering Prediction Process
+cat("\nCLASSIFIER BUILT\n")
+# run prediction process
+source("functions/simple protein predictor.R")
+prediction.process(forest)

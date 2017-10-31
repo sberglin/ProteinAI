@@ -33,34 +33,6 @@ cat("Error Ratio:",
 
 # Triggering Prediction Prompt
 cat("\nCLASSIFIER BUILT\n")
-prediction.type = readline(prompt = "Predict from console (enter 'console') or from file ('file')? ")
-
-if (tolower(prediction.type) == "console") {
-    # prompt for individual prediction
-    input = readline(prompt = "Enter features (ex 13213213) ")
-    
-    features = data.frame()
-    
-    # Processing user input
-    x1 = as.factor(substr(features, 1, 1))
-    x2 = as.factor(substr(features, 2, 2))
-    x3 = as.factor(substr(features, 3, 3))
-    x4 = as.factor(substr(features, 4, 4))
-    x5 = as.factor(substr(features, 5, 5))
-    x6 = as.factor(substr(features, 6, 6))
-    x7 = as.factor(substr(features, 7, 7))
-    x8 = as.factor(substr(features, 8, 8))
-    
-    
-    
-    # predict for it
-    # prediction = predict
-} else {
-    # prompt for proper file to read from
-    
-    # Read in file
-    
-    # predict for file
-    
-    # write predictions to new file
-}
+# run prediction process
+source("functions/simple protein predictor.R")
+prediction.process(forest)

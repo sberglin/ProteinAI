@@ -12,10 +12,9 @@ create.forest <- function(data, adjusted.cutoff) {
     # Creating Tuned Forest
     forest = invisible(
         tuneRF(predictors, responses, stepFactor = 1.5, 
-               improve = 0.005, ntreeTry =  500, plot = FALSE,
-               trace = FALSE, doBest = TRUE,
-               formula = Functionality ~ ., data = data,
-               subset = 1:nrow(data),
+               improve = 0.005, plot = FALSE, trace = FALSE, 
+               doBest = TRUE, formula = Functionality ~ ., 
+               data = data, subset = 1:nrow(data),
                cutoff = c(adjusted.cutoff, 1 - adjusted.cutoff)))
     
     # Output from tuneRF cannot be hidden. Alerting of this in
