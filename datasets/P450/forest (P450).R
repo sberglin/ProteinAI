@@ -9,7 +9,7 @@ source("functions/rf_protein.R")
 original.enzyme = load("P450/enzyme.txt")
 
 # Setting Cutoff
-# (calculated manually using 'cutoff tuning.R')
+# (calculated manually using 'cutoff tuning (functionality ratio).R')
 cutoff = 0.082
 
 # Creating Forest
@@ -26,7 +26,7 @@ print(forest)
 # Postives)
 cat("Error Ratio:",
     forest$confusion[2,3] / forest$confusion[1,3],
-    "(False Negatives per False Positive)")
+    "(False Negatives per False Positive)\n")
 
 # Triggering Prediction Process
 cat("\nCLASSIFIER BUILT\n")

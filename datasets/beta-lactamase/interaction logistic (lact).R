@@ -1,6 +1,9 @@
 #### Purpose ####
 # Create logistic regression model for the beta-lactamase data.
 
+# Loading packages
+library(boot)
+
 # Clearing Workspace
 rm(list = ls())
 

@@ -1,4 +1,3 @@
-
 #### Purpose ####
 # This script uses simulations to determine the approximate error ratio given a test cutoff
 

@@ -1,6 +1,9 @@
 # Clearing Workspace
 rm(list = ls())
 
+# Loading packages
+library(boot)
+
 # Loading Data
 source("functions/load_protein_data.R")
 data = load("P450/enzyme.txt")

@@ -12,7 +12,7 @@ source("functions/rf_protein.R")
 lactamase = load("beta-lactamase/meyer_lactamase.txt")
 
 # Adjusted Cutoff
-# (calculated manually using 'cutoff tuning.R')
+# (calculated manually using 'cutoff tuning (functionality ratio).R')
 cutoff = 0.492
 
 # Creating Forest
