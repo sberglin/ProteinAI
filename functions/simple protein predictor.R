@@ -48,18 +48,26 @@ prediction.process = function(forest) {
     }
     
     # File Predictions
-    if (TRUE) {
+    if (tolower(prediction.type) == "file") {
         
         # prompt for proper file to read from
+        cat("What file holds the feature data?\n",
+            "Note: data must be in proper format (ex: 12312312, 1)")
+        file.path = readline(prompt = "Relative path: ")
         
         # Read in file
+        source("load_protein_data.R")   # Loading function to read data
+        data = load.data(file.path)
         
         # Prompt for 'verbose' parameter
+        
         
         # predict for file
         
         # write predictions to new file
         
+    } else {
+        cat("Improper input type indicated. No predictions made.")
     }
     
 }

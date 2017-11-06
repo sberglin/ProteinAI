@@ -12,8 +12,8 @@ source("functions/rf_protein.R")
 lactamase = load("beta-lactamase/meyer_lactamase.txt")
 
 # Adjusted Cutoff
-# (calculated manually using 'cutoff tuning (functionality ratio).R')
-cutoff = 0.492
+# (calculated manually using 'cutoff tuning.R')
+cutoff = 0.333
 
 # Creating Forest
 cat("Creating Random Forest (beta-lactamase)\n")
@@ -27,9 +27,8 @@ print(forest)
 
 # Displaying Error Ratio (Ratio of False Negatives to False
 # Postives)
-cat("Error Ratio:",
-    forest$confusion[2,3] / forest$confusion[1,3],
-    "(False Negatives per False Positive)\n")
+cat("Functionality Rate of Proteins Predicted to be Functional:",
+    forest$confusion[2,2] / sum(forest$confusion[ , 2]), "\n")
 
 # Triggering Prediction Prompt
 cat("\nCLASSIFIER BUILT\n")
