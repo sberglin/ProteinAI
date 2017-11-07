@@ -44,27 +44,34 @@ prediction.process = function(forest) {
         prediction.2 = predict(forest, new.data,
                                type = "response")
         cat(paste("Predicted Class:", prediction.2))
-        
-    }
     
     # File Predictions
-    if (tolower(prediction.type) == "file") {
+    } else if (tolower(prediction.type) == "file") {
         
         # prompt for proper file to read from
         cat("What file holds the feature data?\n",
-            "Note: data must be in proper format (ex: 12312312, 1)")
+            "Note: data must be in proper format (ex: 12312312\n")
         file.path = readline(prompt = "Relative path: ")
         
         # Read in file
-        source("load_protein_data.R")   # Loading function to read data
-        data = load.data(file.path)
+        # Loading function to read data
+        source("functions/load prediction features.R")
+        data = load.prediction.features(file.path)
         
         # Prompt for 'verbose' parameter
+        cat("Would you like to include confidence for each prediction?")
+        input = readline(prompt = "Yes/No: ")
         
-        
-        # predict for file
-        
+        # Predict for file
+        # No need to include confidence, so simply predict
+        if (tolower(input) == "no") {
+            data$predictions = predict(forest, data)
+        # Must inlcude confidence
+        } else {
+            
+        }
         # write predictions to new file
+        
         
     } else {
         cat("Improper input type indicated. No predictions made.")
