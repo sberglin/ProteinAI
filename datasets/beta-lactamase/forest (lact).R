@@ -34,4 +34,9 @@ cat("Functionality Rate of Proteins Predicted to be Functional:",
 cat("\nCLASSIFIER BUILT\n")
 # run prediction process
 source("functions/simple protein predictor.R")
-# prediction.process(forest)
+# prediction.process(forest) NOT FINISHED YET
+
+# Attempting to Locate Most Common Splits
+# DEV
+tree = randomForest::getTree(forest, k = 1, labelVar = T)
+cat("Number of nodes:", nrow(tree))

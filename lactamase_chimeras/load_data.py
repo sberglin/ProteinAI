@@ -62,22 +62,32 @@ import pickle
 
 # load block alignment for eight block library
 block_alignment, column_names = read_alignment('lactamase_block_alignment.aln')
+# TINKERING
+print("Column names:", column_names)
+print("Type of block_alignment:", type(block_alignment))
+print("Example entry in block_alignment:", block_alignment[4])
+print("Length of block alignement:", len(block_alignment))
 
 # load block alignment for 14 block library
 block_alignment14, column_names = read_alignment('lactamase14_block_alignment.aln')
-# # TINKERING
-# print("Column names:", column_names)
-# print("Type of block_alignment:", type(block_alignment))
-# print("Length of block alignement:", len(block_alignment))
-# print("Example entry in block_alignment:", block_alignment[4])
+# TINKERING
+print("Column names:", column_names)
+print("Type of block_alignment:", type(block_alignment14))
+print("Example entry in block_alignment:", block_alignment14[4])
+print("Length of block alignement:", len(block_alignment14))
 
 # load contacts
 contacts = pickle.load(open('lactamase_contacts.pkl','rb'))
 print("Structure of contacts:", type(contacts))
+print("Example entry of contacts:", contacts[1])
 
 # load binary function data
 names,function_data = read_data('lactamase_function.data')
 AAseqs = [chimera2sequence(block_alignment,f[0]) for f in function_data]
+print("Names:", names)
+print("Type of AAseqs:", type(AAseqs))
+print("Eample entry in AAseqs:", AAseqs[1])
+print("Length of example entry:", len(AAseqs[40]))
 
 # load binary function data for 14 block library
 names,function14_data = read_data('lactamase14_function.data')
