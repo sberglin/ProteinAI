@@ -27,5 +27,4 @@ load <- function(path) {
     data$Features = NULL
     
     return(data)
-    
 }

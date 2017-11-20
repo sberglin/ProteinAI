@@ -87,7 +87,7 @@ AAseqs = [chimera2sequence(block_alignment,f[0]) for f in function_data]
 print("Names:", names)
 print("Type of AAseqs:", type(AAseqs))
 print("Eample entry in AAseqs:", AAseqs[1])
-print("Length of example entry:", len(AAseqs[40]))
+print("Length of example entry:", len(AAseqs[0]))
 
 # load binary function data for 14 block library
 names,function14_data = read_data('lactamase14_function.data')

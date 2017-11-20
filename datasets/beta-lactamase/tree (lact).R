@@ -35,7 +35,7 @@ pruned.fit = prune(fit, fit$cptable[strongest.model.index, "CP"])
 # Displaying Output
 prp(fit, main = "unpruned fit", type = 3)
 # Testing
-# prp(pruned.fit, main = "pruned fit")
+prp(pruned.fit, main = "pruned fit")
 cat("\nError Report (Unpruned data)\n")
 printcp(fit)
 cat("\nError Report (Pruned data)\n")

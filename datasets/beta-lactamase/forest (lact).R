@@ -25,8 +25,7 @@ legend("topright", colnames(forest$err.rate), col = 1:3,
        pch = 15)
 print(forest)
 
-# Displaying Error Ratio (Ratio of False Negatives to False
-# Postives)
+# Displaying Positive Prediction Accuracy
 cat("Functionality Rate of Proteins Predicted to be Functional:",
     forest$confusion[2,2] / sum(forest$confusion[ , 2]), "\n")
 
@@ -38,5 +37,5 @@ source("functions/simple protein predictor.R")
 
 # Attempting to Locate Most Common Splits
 # DEV
-tree = randomForest::getTree(forest, k = 1, labelVar = T)
+tree = randomForest::getTree(forest, labelVar = T)
 cat("Number of nodes:", nrow(tree))
