@@ -12,21 +12,14 @@ source("functions/load_protein_data.R")
 data = load("beta-lactamase/meyer_lactamase.txt")
 
 # Creating Tree from Test Data
-fit = rpart(
-    formula = Functionality ~ x1 + x2 + x3 + x4 + x5
-    + x6 + x7 + x8, 
-    data = data, 
-    method = "class", 
-    control = rpart.control(cp = 0.00001)
-)
+fit = rpart(formula = Functionality ~ .,  data = data, 
+             method = "class", control = rpart.control(cp = 0.00001))
 
 # Pruning Tree
 
 # Finding Range for xerrors
-min.xerror = fit$cptable[
-    which.min(fit$cptable[ , "xerror"]),"xerror"]
-min.xerror.xstd = fit$cptable[
-    which.min(fit$cptable[ , "xerror"]),"xstd"]
+min.xerror = fit$cptable[which.min(fit$cptable[ , "xerror"]),"xerror"]
+min.xerror.xstd = fit$cptable[which.min(fit$cptable[ , "xerror"]),"xstd"]
 # Finding Simplest Model with 'Equivalent' Accuracy
 strongest.model.index = min(which((fit$cptable[ , "xerror"] >= min.xerror - min.xerror.xstd) & (fit$cptable[ , "xerror"] <= min.xerror + min.xerror.xstd)))
 # Pruning
@@ -34,7 +27,6 @@ pruned.fit = prune(fit, fit$cptable[strongest.model.index, "CP"])
 
 # Displaying Output
 prp(fit, main = "unpruned fit", type = 3)
-# Testing
 prp(pruned.fit, main = "pruned fit")
 cat("\nError Report (Unpruned data)\n")
 printcp(fit)
