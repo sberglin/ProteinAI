@@ -62,32 +62,25 @@ import pickle
 
 # load block alignment for eight block library
 block_alignment, column_names = read_alignment('lactamase_block_alignment.aln')
-# TINKERING
-print("Column names:", column_names)
-print("Type of block_alignment:", type(block_alignment))
-print("Example entry in block_alignment:", block_alignment[4])
-print("Length of block alignement:", len(block_alignment))
 
 # load block alignment for 14 block library
 block_alignment14, column_names = read_alignment('lactamase14_block_alignment.aln')
-# TINKERING
-print("Column names:", column_names)
-print("Type of block_alignment:", type(block_alignment14))
-print("Example entry in block_alignment:", block_alignment14[4])
-print("Length of block alignement:", len(block_alignment14))
 
 # load contacts
 contacts = pickle.load(open('lactamase_contacts.pkl','rb'))
-print("Structure of contacts:", type(contacts))
-print("Example entry of contacts:", contacts[1])
+# print("Structure of contacts:", type(contacts))
+# print("Example entry of contacts:", contacts[1])
 
 # load binary function data
 names,function_data = read_data('lactamase_function.data')
 AAseqs = [chimera2sequence(block_alignment,f[0]) for f in function_data]
-print("Names:", names)
-print("Type of AAseqs:", type(AAseqs))
-print("Eample entry in AAseqs:", AAseqs[1])
-print("Length of example entry:", len(AAseqs[0]))
+AAseqsFunctionality = [f[1] for f in function_data]
+print(len(AAseqsFunctionality))
+# print("Names:", names)
+# print("Type of AAseqs:", type(AAseqs))
+# print("Eample entry in AAseqs:", AAseqs[1])
+# print("Length of example entry:", len(AAseqs[0]))
+# print("Length of list:", len(AAseqs))
 
 # load binary function data for 14 block library
 names,function14_data = read_data('lactamase14_function.data')
@@ -99,12 +92,26 @@ AAseqs14 = [chimera2sequence(block_alignment14,f[0]) for f in function14_data]
 # contactsFile = open("contacts.txt", "w")
 # for contact in contacts:
 #     contactsFile.write(' '.join(str(s) for s in contact) + '\n')
-# # AAseqs
-# AAseqsFile = open("AAseqs.txt", "w")
-# for seq in AAseqs:
-#     AAseqsFile.write(seq)
+
+# AAseqs
+# Opening files
+AAseqsFile = open("AAseqs.txt", "w")
+AAseqsFunctionalityFile = open("AAseqsFunctionality.txt", "w")
+# Writing
+for seq in AAseqs:
+    # print(seq)
+    AAseqsFile.write(seq)
+    AAseqsFile.write("\n")
+for functionality in AAseqsFunctionality:
+    AAseqsFunctionalityFile.write(functionality)
+    AAseqsFunctionalityFile.write("\n")
+# Closing files
+AAseqsFile.close()
+AAseqsFunctionalityFile.close()
+
 # # AAseqs14
 # AAseqs14File = open("AAseqs14.txt", "w")
 # for seq in AAseqs14:
 #     AAseqs14File.write(seq)
-# print("Data written to respective txt files.")
+#     AAseqs14File.write("\n")
+# AAseqs14File.close()

@@ -22,5 +22,4 @@ create.forest <- function(data, adjusted.cutoff) {
         "and cannot hide.\n")
     
     return(forest)
-    
 }

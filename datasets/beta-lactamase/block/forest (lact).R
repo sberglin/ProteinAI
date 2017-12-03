@@ -9,7 +9,7 @@ source("functions/load_protein_data.R")
 source("functions/rf_protein.R")
 
 # Loading Data
-lactamase = load("beta-lactamase/meyer_lactamase.txt")
+lactamase = load("beta-lactamase/block/meyer_lactamase.txt")
 
 # Adjusted Cutoff
 # (calculated manually using 'cutoff tuning.R')

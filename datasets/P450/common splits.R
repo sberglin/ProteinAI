@@ -1,9 +1,10 @@
 #### Purpose ####
 # Finds the most common splits in a set of N decision trees. A set of decision trees is used rather than simpy a random forest since correlation between each tree is DESIRED
 
-#### Loading Data, Functions, and Creating Trees ####
+#### Loading Data, Functions, and Packages ####
+library(rpart)
 # Number of Trees to Grow
-n = 5
+n = 10
 # Functions
 findNodeStructure = function(tree, node) {
     ancestors = unlist(path.rpart(tree, node, print.it = F))
@@ -28,14 +29,16 @@ createTree = function(data) {
 # Loading Data
 source("functions/load_protein_data.R")
 data = load("P450/enzyme.txt")
-# Creating Trees
-trees = list()
+
+#### Finding Common Splits ####
 for (i in 1:n) {
-    # index = as.character(i)
-    trees$`i` = createTree(data)
+    # Creating the tree
+    tree = createTree(data)
+    
+    # Finding the most common splits
+    
 }
-# Removing excess variables
-# rm(i, index)
+
 
 #### Documenting Each Split Choice of Each Tree ####
 # for each tree in the forest
@@ -50,6 +53,6 @@ for (tree in trees) {
 }
 
 # a = findNodeStructure(pruned.fit, 2)
-leaves = which(structure$var == "<leaf>")
+# leaves = which(structure$var == "<leaf>")
 
 #### Finding Most Common Splits ####
