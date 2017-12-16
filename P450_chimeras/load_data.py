@@ -30,7 +30,7 @@ def read_data(datafile):
     '''reads the standard data file format I have been using'''
     data = open(datafile,'r').read().strip().replace('\t','').split('\n')
 
-    # remove all comments in data file 
+    # remove all comments in data file
     nocomments = [line.split('#')[0].strip() for line in data if len(line.strip())>0 and line.strip()[0]!='#']
 
 
@@ -66,7 +66,7 @@ Functional evolution and structural conservation in chimeric cytochromes p450: c
 
 Navigating the protein fitness landscape with Gaussian processes
  - three block chimera function/thermostability data
- - UCB designed sequences and thermostability 
+ - UCB designed sequences and thermostability
  - substrate specficity
 
 
@@ -81,12 +81,14 @@ import pickle
 # load block alignment for eight block library
 block_alignment, column_names = read_alignment('P450_block_alignment.aln')
 
-# load contacts 
+# load contacts
 contacts = pickle.load(open('P450_contacts.pkl','rb'))
 
-# load binary function data 
+# load binary function data
 names,function_data = read_data('P450_function.data')
 AAseqs_fcn = [chimera2sequence(block_alignment,f[0]) for f in function_data]
+# ADDED RECEIPT OF FUNCTIONALITY Data
+AAseqsFunctionality = [f[1] for f in function_data]
 
 # load thermostability data
 names,thermo_data = read_data('P450_thermostability.data')
@@ -104,4 +106,16 @@ AAseqs_spec = [chimera2sequence(block_alignment,f[0]) for f in specificity_data2
 
 # WRITING DATA
 
-
+## AAseqs
+AAseqsFile = open("AAseqs.txt", "w")
+AAseqsFunctionalityFile = open("AAseqsFunctionalityFile.txt", "w")
+# Writing
+for seq in AAseqs_fcn:
+    AAseqsFile.write(seq)
+    AAseqsFile.write("\n")
+for functionality in AAseqsFunctionality:
+    AAseqsFunctionalityFile.write(functionality)
+    AAseqsFunctionalityFile.write("\n")
+# Closing files
+AAseqsFile.close()
+AAseqsFunctionalityFile.close()
