@@ -4,7 +4,7 @@
 #### Loading Data, Functions, and Packages ####
 library(rpart)
 # Number of Trees to Grow
-n = 10
+n = 5
 # Functions
 findNodeStructure = function(tree, node) {
     ancestors = unlist(path.rpart(tree, node, print.it = F))
@@ -28,29 +28,44 @@ createTree = function(data) {
 }
 # Loading Data
 source("functions/load_protein_data.R")
-data = load("P450/enzyme.txt")
+data = load("P450/block/enzyme.txt")
+# Record of all split types
+splits = list()
 
 #### Finding Common Splits ####
 for (i in 1:n) {
     # Creating the tree
-    tree = createTree(data)
+    newTree = createTree(data)
     
     # Finding the most common splits
+    
+    # Finding indices of leaf nodes
+    leafIndices = which(newTree$frame$var == "<leaf>")
+    
+    # For each leaf node
+    for (leafIndex in leafIndices) {
+        # Find the structure of it
+        structure = findNodeStructure(newTree, leafIndex)
+        # record it
+        
+    }
+        
+    
     
 }
 
 
 #### Documenting Each Split Choice of Each Tree ####
 # for each tree in the forest
-for (tree in trees) {
-    # for each leaf node of the tree
-    leaves = which(tree$frame$var == "<leaf>")
-        # find the Node Structure
-        # if it exists in the current node structure bank
-            # incremement the matching structure count by one
-        # else
-            # add it to the structure bank with a count of one
-}
+# for (tree in trees) {
+#     # for each leaf node of the tree
+#     leaves = which(tree$frame$var == "<leaf>")
+#         # find the Node Structure
+#         # if it exists in the current node structure bank
+#             # incremement the matching structure count by one
+#         # else
+#             # add it to the structure bank with a count of one
+# }
 
 # a = findNodeStructure(pruned.fit, 2)
 # leaves = which(structure$var == "<leaf>")
