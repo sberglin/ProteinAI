@@ -1,4 +1,4 @@
-# This script creates an individual decsion tree for the cel9 data.
+# This script creates an individual decsion tree for the CBHII data.
 
 # Clearing Workspace and Loading Packages
 library("rpart")
@@ -8,7 +8,7 @@ library("rpart.plot")
 rm(list = ls())
 
 # Loading Data
-source("small sets/cel5/load.R")
+source("small sets/CBHII/load.R")
 data = load()
 
 # Creating Tree from Test Data

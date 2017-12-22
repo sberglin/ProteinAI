@@ -4,7 +4,7 @@
 load <- function() {
     
     # Intially Reading Data
-    data = read.csv('small sets/cel5/cel5_function.txt', header = FALSE,
+    data = read.csv('small sets/CBHII/CBHII_function.txt', header = FALSE,
                     col.names = c("Features", "Functionality"),
                     colClasses = c("character", "integer"))
     
@@ -19,6 +19,8 @@ load <- function() {
     data$x4 = as.factor(substr(data$Features, 4, 4))
     data$x5 = as.factor(substr(data$Features, 5, 5))
     data$x6 = as.factor(substr(data$Features, 6, 6))
+    data$x7 = as.factor(substr(data$Features, 7, 7))
+    data$x8 = as.factor(substr(data$Features, 8, 8))
     
     # Removing Features Column
     data$Features = NULL
