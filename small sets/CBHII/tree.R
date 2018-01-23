@@ -12,8 +12,8 @@ source("small sets/CBHII/load.R")
 data = load()
 
 # Creating Tree from Test Data
-fit = rpart(formula = Functionality ~ .,  data = data, 
-            method = "class", control = rpart.control(cp = 0.00001))
+fit = rpart(formula = Functionality ~ .,  data = data, method = "class",
+            control = rpart.control(minsplit = nrow(data) / 20))
 
 # Pruning Tree
 # Finding Range for xerrors

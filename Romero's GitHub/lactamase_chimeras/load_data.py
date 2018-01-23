@@ -58,7 +58,9 @@ Library Analysis of SCHEMA-Guided Protein Recombination
  - 14 block library (not so much data)"""
 
 
-import pickle
+import pickle, os
+# os.chdir("lactamase_chimeras")
+print("Current Working Directory:", os.getcwd())
 
 # load block alignment for eight block library
 block_alignment, column_names = read_alignment('lactamase_block_alignment.aln')
@@ -68,14 +70,15 @@ block_alignment14, column_names = read_alignment('lactamase14_block_alignment.al
 
 # load contacts
 contacts = pickle.load(open('lactamase_contacts.pkl','rb'))
-# print("Structure of contacts:", type(contacts))
-# print("Example entry of contacts:", contacts[1])
+print("Structure of contacts:", type(contacts))
+print("Example entry of contacts:", contacts[1])
+print("Length of contacts list:", len(contacts))
 
 # load binary function data
 names,function_data = read_data('lactamase_function.data')
 AAseqs = [chimera2sequence(block_alignment,f[0]) for f in function_data]
 AAseqsFunctionality = [f[1] for f in function_data]
-print(len(AAseqsFunctionality))
+# print(len(AAseqsFunctionality))
 # print("Names:", names)
 # print("Type of AAseqs:", type(AAseqs))
 # print("Eample entry in AAseqs:", AAseqs[1])
@@ -95,19 +98,19 @@ AAseqs14 = [chimera2sequence(block_alignment14,f[0]) for f in function14_data]
 
 # AAseqs
 # Opening files
-AAseqsFile = open("AAseqs.txt", "w")
-AAseqsFunctionalityFile = open("AAseqsFunctionality.txt", "w")
-# Writing
-for seq in AAseqs:
-    # print(seq)
-    AAseqsFile.write(seq)
-    AAseqsFile.write("\n")
-for functionality in AAseqsFunctionality:
-    AAseqsFunctionalityFile.write(functionality)
-    AAseqsFunctionalityFile.write("\n")
-# Closing files
-AAseqsFile.close()
-AAseqsFunctionalityFile.close()
+# AAseqsFile = open("AAseqs.txt", "w")
+# AAseqsFunctionalityFile = open("AAseqsFunctionality.txt", "w")
+# # Writing
+# for seq in AAseqs:
+#     # print(seq)
+#     AAseqsFile.write(seq)
+#     AAseqsFile.write("\n")
+# for functionality in AAseqsFunctionality:
+#     AAseqsFunctionalityFile.write(functionality)
+#     AAseqsFunctionalityFile.write("\n")
+# # Closing files
+# AAseqsFile.close()
+# AAseqsFunctionalityFile.close()
 
 # # AAseqs14
 # AAseqs14File = open("AAseqs14.txt", "w")

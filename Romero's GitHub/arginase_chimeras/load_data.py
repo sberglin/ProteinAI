@@ -31,7 +31,7 @@ def read_data(datafile):
     '''reads the standard data file format I have been using'''
     data = open(datafile,'r').read().strip().replace('\t','').split('\n')
 
-    # remove all comments in data file 
+    # remove all comments in data file
     nocomments = [line.split('#')[0].strip() for line in data if len(line.strip())>0 and line.strip()[0]!='#']
 
 
@@ -50,20 +50,26 @@ def read_data(datafile):
 
 notes = """
 
-Data Sources: 
+Data Sources:
 
 SCHEMA-Designed Variants of Human Arginase I and II Reveal Sequence Elements Important to Stability and Catalysis"""
 
 
-import pickle
+import pickle, os
+print("Current Working Directory:", os.getcwd())
 
 # load block alignment for eight block library
 block_alignment, column_names = read_alignment('arginase_block_alignment.aln')
 
-# load contacts 
+# load contacts
 contacts = pickle.load(open('arginase_contacts.pkl','rb'))
 
 # load all data
 names,all_data = read_data('arginase_functional_data.data')
 AAseqs = [chimera2sequence(block_alignment,f[1]) for f in all_data]
+print("all_data Structure:", type(AAseqs))
+print("Example entry in all_data:", AAseqs[1])
 
+
+# WRITING DATA
+# functionFile = open("")

@@ -9,7 +9,7 @@ rm(list = ls())
 
 # Loading Data
 source("functions/load_protein_data.R")
-data = load("beta-lactamase/meyer_lactamase.txt")
+data = load("lactamase/block/meyer_lactamase.txt")
 
 # Creating Tree from Test Data
 fit = rpart(formula = Functionality ~ .,  data = data, 
