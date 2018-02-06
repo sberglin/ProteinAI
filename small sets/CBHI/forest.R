@@ -24,3 +24,6 @@ cat("\nFunctionality Rate of Proteins Predicted to be Functional:",
 # Displaying Percent of Functional Proteins Actually Predicted Functional
 cat("Proportion of Functional Proteins Predicted to be Functional:",
     forest$confusion[2,2] / sum(forest$confusion[2,1:2]), "\n")
+# Displaying Importance Scores
+cat("\nImportance Scoring\n")
+print(importance(forest))

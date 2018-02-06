@@ -17,7 +17,7 @@ cutoff = 0.5
 cat("Creating Random Forest (P450)\n")
 forest = create.forest(original.enzyme, cutoff)
 
-# Displaying Output
+#### Displaying Model ####
 plot(forest, main = "Error Rates vs Number of Trees")
 legend("topright", colnames(forest$err.rate), col = 1:3, 
        pch = 15)
@@ -31,8 +31,13 @@ cat("\nFunctionality Rate of Proteins Predicted to be Functional:",
 cat("\nProportion of Functional Proteins Predicted Correctly:",
     forest$confusion[2,2] / sum(forest$confusion[2,1:2]))
 
-# Triggering Prediction Process
-cat("\n\nCLASSIFIER BUILT\n")
-# run prediction process
-source("functions/simple protein predictor.R")
-# prediction.process(forest)
+# Displaying Importance Scores
+cat("\nImportance Scoring\n")
+print(importance(forest))
+
+
+#### Triggering Prediction Process ####
+# cat("\n\nCLASSIFIER BUILT\n")
+# # run prediction process
+# source("functions/simple protein predictor.R")
+# # prediction.process(forest)
