@@ -1,0 +1,11 @@
+        Rank         Score    Variable
+        1.00     1.90354E+01  x1
+        2.00     1.59700E+01  x7
+        3.00     1.55810E+01  x5
+        4.00     4.74149E+00  x2
+        5.00     4.74063E+00  x4
+        6.00     2.43346E+00  x8
+        7.00     1.96155E+00  x6
+        8.00     4.58260E-01  x3
+
+Scores above 1 indicate significant variables

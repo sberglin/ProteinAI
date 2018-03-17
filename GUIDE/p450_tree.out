@@ -1,0 +1,349 @@
+             GGG   U   U  I  DDDD   EEEE
+            G   G  U   U  I  D   D  E
+            G      U   U  I  D   D  E
+            G  GG  U   U  I  D   D  EEE
+            G   G  U   U  I  D   D  E
+            G   G  U   U  I  D   D  E
+             GGG    UUU   I  DDDD   EEEE
+   
+ GUIDE Classification and Regression Trees and Forests
+ Compiled with NAG Fortran 6.2.0 on Mac OS X Sierra 10.12.6  
+ Version 27.0 (Build date: November 6, 2017)       
+ Copyright (c) 1997-2017 Wei-Yin Loh. All rights reserved.
+ This software is based upon work supported by the U.S. Army Research Office,
+ the National Science Foundation and the National Institutes of Health.
+  
+ This job was started on: 03/14/18 at 16:00
+  
+ Classification tree
+ Pruning by cross-validation
+ Data description file: p450.dsc
+ Training sample file: p450.csv
+ Missing value code: NA
+ Records in data file start on line 2
+ Warning: B variables changed to C
+ Dependent variable is Functionality
+ Number of records in data file: 955
+ Length of longest data entry: 1
+ Number of classes: 2
+ Class proportions of dependent variable Functionality:
+ Class      #Cases    Proportion
+ 0             331    0.34659686
+ 1             624    0.65340314
+  
+ Summary information (without x variables)
+ d=dependent, b=split and fit cat variable using 0-1 dummies,
+ c=split-only categorical, n=split and fit numerical, f=fit-only numerical,
+ s=split-only numerical, w=weight
+  Column  Name                          Minimum      Maximum    #Categories       #Missing
+       1  Functionality             d                                     2
+       2  x1                        c                                     3
+       3  x2                        c                                     3
+       4  x3                        c                                     3
+       5  x4                        c                                     3
+       6  x5                        c                                     3
+       7  x6                        c                                     3
+       8  x7                        c                                     3
+       9  x8                        c                                     3
+  
+      Total  #cases w/   #missing
+     #cases    miss. D  ord. vals   #X-var   #N-var   #F-var   #S-var   #B-var   #C-var
+        955          0          0        0        0        0        0        0        8
+ No. cases used for training: 955
+  
+ Univariate split highest priority
+ Interaction and linear splits 2nd and 3rd priorities
+ Pruning by v-fold cross-validation, with v = 10
+ Selected tree is based on mean of CV estimates
+ Simple node models
+ Estimated priors
+ Unit misclassification costs
+ Split values for N and S variables based on exhaustive search
+ Max. number of split levels: 10
+ Min. node sample size: 4
+ Number of SE's for pruned tree:  5.0000E-01
+  
+ Size and CV mean cost and SE of subtrees:
+  Tree   #Tnodes  Mean Cost   SE(Mean)   BSE(Mean)  Median Cost  BSE(Median)
+    1       90   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+    2       89   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+    3       88   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+    4       87   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+    5       86   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+    6       85   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+    7       84   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+    8       83   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+    9       82   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   10       81   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   11       80   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   12       79   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   13       78   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   14       77   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   15       76   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   16       74   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   17       73   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   18       72   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   19       71   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   20       70   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   21       69   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   22       67   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   23       64   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   24       63   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   25       62   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   26       61   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   27       60   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   28       59   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   29       58   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   30       57   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   31       56   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   32       55   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   33       54   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   34       53   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   35       52   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   36       51   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   37       50   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   38       49   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   39       48   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   40       46   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   41       45   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   42       44   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   43       43   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   44       42   1.812E-01   1.246E-02   1.222E-02   1.875E-01   1.882E-02
+   45       40   1.707E-01   1.217E-02   1.090E-02   1.771E-01   1.760E-02
+   46       36   1.707E-01   1.217E-02   1.090E-02   1.771E-01   1.760E-02
+   47       29   1.707E-01   1.217E-02   1.090E-02   1.771E-01   1.760E-02
+   48       28   1.707E-01   1.217E-02   1.090E-02   1.771E-01   1.760E-02
+   49       26   1.707E-01   1.217E-02   1.090E-02   1.771E-01   1.760E-02
+   50       24   1.707E-01   1.217E-02   1.090E-02   1.771E-01   1.760E-02
+   51       23   1.634E-01   1.196E-02   1.089E-02   1.615E-01   1.613E-02
+   52*      20   1.634E-01   1.196E-02   1.089E-02   1.615E-01   1.613E-02
+   53       18   1.654E-01   1.202E-02   1.035E-02   1.667E-01   1.593E-02
+   54       17   1.654E-01   1.202E-02   1.035E-02   1.667E-01   1.593E-02
+   55       16   1.644E-01   1.199E-02   9.291E-03   1.667E-01   1.094E-02
+   56++     11   1.675E-01   1.208E-02   9.248E-03   1.667E-01   8.846E-03
+   57**      9   1.686E-01   1.211E-02   8.168E-03   1.728E-01   9.126E-03
+   58        6   1.770E-01   1.235E-02   8.232E-03   1.832E-01   1.242E-02
+   59        5   1.728E-01   1.223E-02   9.088E-03   1.780E-01   1.551E-02
+   60        4   1.728E-01   1.223E-02   9.088E-03   1.780E-01   1.551E-02
+   61        2   2.565E-01   1.413E-02   1.454E-02   2.526E-01   2.012E-02
+   62        1   3.466E-01   1.540E-02   1.993E-03   3.474E-01   2.732E-03
+  
+ 0-SE tree based on mean is marked with *
+ 0-SE tree based on median is marked with +
+ Selected-SE tree based on mean using naive SE is marked with **
+ Selected-SE tree based on mean using bootstrap SE is marked with --
+ Selected-SE tree based on median and bootstrap SE is marked with ++
+ * tree same as + tree
+ ** tree same as -- tree
+  
+ Following tree is based on mean CV with naive SE estimate (**).
+  
+ Structure of final tree. Each terminal node is marked with a T.
+  
+ Node cost is node misclassification cost divided by number of training cases
+        Node    Total    Train    Predicted        Node    Split          Interacting
+       label    cases    cases    class            cost    variables      variable
+           1      955      955    1              3.466E-01 x5 
+           2      208      208    0              2.933E-01 x8 
+           4       60       60    1              3.833E-01 x6 
+           8T      14       14    0              2.857E-01 x2 
+           9T      46       46    1              2.826E-01 x7 
+           5T     148      148    0              1.622E-01 x7 
+           3      747      747    1              2.463E-01 x1 
+           6T     389      389    1              7.969E-02 x2 
+           7      358      358    1              4.274E-01 x7 
+          14T     154      154    1              1.169E-01 x2 
+          15      204      204    0              3.382E-01 x4 
+          30T     125      125    0              2.240E-01 x3 
+          31       79       79    1              4.810E-01 x7 :x6
+          62T      39       39    1              3.846E-01 x1 
+          63       40       40    0              4.250E-01 x6 
+         126T      16       16    1              2.500E-01 x8 
+         127T      24       24    0              2.083E-01 x6 
+  
+ Number of terminal nodes of final tree: 9
+ Total number of nodes of final tree: 17
+ Second best split variable (based on curvature test) at root node is x1
+  
+ Classification tree:
+  
+  Node 1: x5 = "1"
+    Node 2: x8 = "3"
+      Node 4: x6 = "1"
+        Node 8: 0
+      Node 4: x6 /= "1"
+        Node 9: 1
+    Node 2: x8 /= "3"
+      Node 5: 0
+  Node 1: x5 /= "1"
+    Node 3: x1 = "2"
+      Node 6: 1
+    Node 3: x1 /= "2"
+      Node 7: x7 = "3"
+        Node 14: 1
+      Node 7: x7 /= "3"
+        Node 15: x4 = "3"
+          Node 30: 0
+        Node 15: x4 /= "3"
+          Node 31: x7 = "1"
+            Node 62: 1
+          Node 31: x7 /= "1"
+            Node 63: x6 = "3"
+              Node 126: 1
+            Node 63: x6 /= "3"
+              Node 127: 0
+ 
+ ***************************************************************
+ 
+  
+ Node 1: Intermediate node
+ A case goes into Node 2 if x5 = "1"
+ x5 mode = "2"
+ Class      Number  ClassPrior
+ 0             331     0.34660
+ 1             624     0.65340
+ Number of training cases misclassified =  331
+ Predicted class is 1
+ ----------------------------
+ Node 2: Intermediate node
+ A case goes into Node 4 if x8 = "3"
+ x8 mode = "2"
+ Class      Number  ClassPrior
+ 0             147     0.70673
+ 1              61     0.29327
+ Number of training cases misclassified =  61
+ Predicted class is 0
+ ----------------------------
+ Node 4: Intermediate node
+ A case goes into Node 8 if x6 = "1"
+ x6 mode = "3"
+ Class      Number  ClassPrior
+ 0              23     0.38333
+ 1              37     0.61667
+ Number of training cases misclassified =  23
+ Predicted class is 1
+ ----------------------------
+ Node 8: Terminal node
+ Class      Number  ClassPrior
+ 0              10     0.71429
+ 1               4     0.28571
+ Number of training cases misclassified =  4
+ Predicted class is 0
+ ----------------------------
+ Node 9: Terminal node
+ Class      Number  ClassPrior
+ 0              13     0.28261
+ 1              33     0.71739
+ Number of training cases misclassified =  13
+ Predicted class is 1
+ ----------------------------
+ Node 5: Terminal node
+ Class      Number  ClassPrior
+ 0             124     0.83784
+ 1              24     0.16216
+ Number of training cases misclassified =  24
+ Predicted class is 0
+ ----------------------------
+ Node 3: Intermediate node
+ A case goes into Node 6 if x1 = "2"
+ x1 mode = "2"
+ Class      Number  ClassPrior
+ 0             184     0.24632
+ 1             563     0.75368
+ Number of training cases misclassified =  184
+ Predicted class is 1
+ ----------------------------
+ Node 6: Terminal node
+ Class      Number  ClassPrior
+ 0              31     0.07969
+ 1             358     0.92031
+ Number of training cases misclassified =  31
+ Predicted class is 1
+ ----------------------------
+ Node 7: Intermediate node
+ A case goes into Node 14 if x7 = "3"
+ x7 mode = "3"
+ Class      Number  ClassPrior
+ 0             153     0.42737
+ 1             205     0.57263
+ Number of training cases misclassified =  153
+ Predicted class is 1
+ ----------------------------
+ Node 14: Terminal node
+ Class      Number  ClassPrior
+ 0              18     0.11688
+ 1             136     0.88312
+ Number of training cases misclassified =  18
+ Predicted class is 1
+ ----------------------------
+ Node 15: Intermediate node
+ A case goes into Node 30 if x4 = "3"
+ x4 mode = "3"
+ Class      Number  ClassPrior
+ 0             135     0.66176
+ 1              69     0.33824
+ Number of training cases misclassified =  69
+ Predicted class is 0
+ ----------------------------
+ Node 30: Terminal node
+ Class      Number  ClassPrior
+ 0              97     0.77600
+ 1              28     0.22400
+ Number of training cases misclassified =  28
+ Predicted class is 0
+ ----------------------------
+ Node 31: Intermediate node
+ A case goes into Node 62 if x7 = "1"
+ x7 mode = "2"
+ Class      Number  ClassPrior
+ 0              38     0.48101
+ 1              41     0.51899
+ Number of training cases misclassified =  38
+ Predicted class is 1
+ ----------------------------
+ Node 62: Terminal node
+ Class      Number  ClassPrior
+ 0              15     0.38462
+ 1              24     0.61538
+ Number of training cases misclassified =  15
+ Predicted class is 1
+ ----------------------------
+ Node 63: Intermediate node
+ A case goes into Node 126 if x6 = "3"
+ x6 mode = "3"
+ Class      Number  ClassPrior
+ 0              23     0.57500
+ 1              17     0.42500
+ Number of training cases misclassified =  17
+ Predicted class is 0
+ ----------------------------
+ Node 126: Terminal node
+ Class      Number  ClassPrior
+ 0               4     0.25000
+ 1              12     0.75000
+ Number of training cases misclassified =  4
+ Predicted class is 1
+ ----------------------------
+ Node 127: Terminal node
+ Class      Number  ClassPrior
+ 0              19     0.79167
+ 1               5     0.20833
+ Number of training cases misclassified =  5
+ Predicted class is 0
+ ----------------------------
+  
+ 
+ Classification matrix for training sample:
+ Predicted      True class
+ class              0         1
+ 0                250        61
+ 1                 81       563
+ Total            331       624
+ 
+ Number of cases used for tree construction: 955
+ Number misclassified: 142
+ Resubstitution est. of mean misclassification cost:   0.1487    
+ 
+ Observed and fitted values are stored in nodeId
+ LaTeX code for tree is in p450_tree.tex
+ Elapsed time in seconds:    0.4044090

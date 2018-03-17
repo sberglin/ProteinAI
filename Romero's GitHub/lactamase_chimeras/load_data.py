@@ -75,9 +75,9 @@ print("Example entry of contacts:", contacts[1])
 print("Length of contacts list:", len(contacts))
 
 # load binary function data
-names,function_data = read_data('lactamase_function.data')
-AAseqs = [chimera2sequence(block_alignment,f[0]) for f in function_data]
-AAseqsFunctionality = [f[1] for f in function_data]
+# names,function_data = read_data('lactamase_function.data')
+# AAseqs = [chimera2sequence(block_alignment,f[0]) for f in function_data]
+# AAseqsFunctionality = [f[1] for f in function_data]
 # print(len(AAseqsFunctionality))
 # print("Names:", names)
 # print("Type of AAseqs:", type(AAseqs))
@@ -86,15 +86,16 @@ AAseqsFunctionality = [f[1] for f in function_data]
 # print("Length of list:", len(AAseqs))
 
 # load binary function data for 14 block library
-names,function14_data = read_data('lactamase14_function.data')
-AAseqs14 = [chimera2sequence(block_alignment14,f[0]) for f in function14_data]
+# names,function14_data = read_data('lactamase14_function.data')
+# AAseqs14 = [chimera2sequence(block_alignment14,f[0]) for f in function14_data]
 
 # WRITING DATA
 
-# # Contacts
-# contactsFile = open("contacts.txt", "w")
-# for contact in contacts:
-#     contactsFile.write(' '.join(str(s) for s in contact) + '\n')
+# Contacts
+contactsFile = open("contacts.txt", "w")
+for contact in contacts:
+    contactsFile.write(' '.join(str(s) for s in contact) + '\n')
+
 
 # AAseqs
 # Opening files

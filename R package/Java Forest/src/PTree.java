@@ -10,6 +10,7 @@ public class PTree {
 	// TESTING
 	public static void main(String[] args) {
 		ChiSquareTest x = new ChiSquareTest();
+		
 		System.out.println("Done");
 	}
 

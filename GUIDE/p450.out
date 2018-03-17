@@ -13,7 +13,7 @@
  This software is based upon work supported by the U.S. Army Research Office,
  the National Science Foundation and the National Institutes of Health.
   
- This job was started on: 12/18/17 at 14:09
+ This job was started on: 03/14/18 at 15:55
   
  Random forest of classification trees
  with random division of missing values
@@ -62,18 +62,18 @@
  Fraction of cases used for splitting each node:  0.10471    
  Max. number of split levels: 10
  Min. node sample size: 5
- Mean number of terminal nodes:    57.77    
+ Mean number of terminal nodes:    58.32    
  
  Classification matrix for training sample:
  Predicted       True class
 class              0         1
- 0                248        57
- 1                 83       567
+ 0                246        54
+ 1                 85       570
  Total            331       624
  
  Number of cases used for tree construction: 955
- Number misclassified: 140
- Resubstitution est. of mean misclassification cost:   0.1466    
+ Number misclassified: 139
+ Resubstitution est. of mean misclassification cost:   0.1455    
  
- Predicted class probabilities are stored in p450_predictions.txt
- Elapsed time in seconds:    2.4765410
+ Predicted class probabilities are stored in p450_preds
+ Elapsed time in seconds:    2.5776989
