@@ -1,5 +1,5 @@
 import java.util.Arrays;
-//import java.util.Collections;
+import java.util.Collections;
 import org.apache.commons.math3.stat.inference.ChiSquareTest;
 import java.util.ArrayList;
 
@@ -9,9 +9,20 @@ public class PTree {
 	
 	// TESTING
 	public static void main(String[] args) {
-		ChiSquareTest x = new ChiSquareTest();
 		
-		System.out.println("Done");
+		// Testing Split Method
+		Node t = new Node(null, null);
+		int var = 1;
+		String[][] variables = { {"1", "2", "3"},
+								 {"1", "2", "3"} };
+		
+		
+//		// Testing Chi-Squared Data
+//		ChiSquareTest x = new ChiSquareTest();
+//		long[][] data = { { 60, 54, 46, 41},
+//				         { 40, 44, 53, 57}  };
+//		double s = x.chiSquare(data);
+//		System.out.println(s);
 	}
 
 	/**
@@ -28,19 +39,19 @@ public class PTree {
 	 * "name" each variable as its position in the sequence, starting from
 	 * zero.
 	 */
-	public PTree(String[][] predictors, String[] response, String[][] variables) {
+	public PTree(String[][] predictors, int[] response, String[][] variables) {
 		
-		// Split the root node
+		// Grow the root node
 	}
 	
 	/** 
 	 * Splits a given node on a given variable.
 	 * 
-	 * @param t
-	 * @param var
-	 * @param variables
+	 * @param t Node to split
+	 * @param var Variable to split on
+	 * @param variables Structure of data
 	 */
-	private void split(Node t, int var, String[][] variables) {
+	private static void split(Node t, int var, String[][] variables) {
 		
 		// New List of Children
 		ArrayList<Node> children = new ArrayList<Node>();
@@ -63,13 +74,23 @@ public class PTree {
 	 * Finds the strongest variable to split on, measured by a Chi-squared
 	 * test.
 	 * 
+	 * Note: If the best variable does not split the data "well enough,"
+	 * returns -1 to indicate that no variable is appropriate.
+	 * 
 	 * @param t
+	 * @param nodeData indices of data that is "present" in node t. Since the
+	 * tree is splitting data, each node cannot "see" all of the data. Thus,
+	 * we consider a subset of the data parameterized by indices.
+	 * @param variables Structure of data
 	 * @return
 	 */
-	private String findVar(Node t, String[][] nodeData, String[][] variables) {
+	private static int findVar(Node t, int[] nodeData, String[][] predictors,
+			int[] response, String[][] variables) {
+		
+		ArrayList<Integer> vars = new ArrayList<Integer>();	// List of vars to test
+		long[][] conTab = null; 								// Contingency table for data
 		
 		// Gathering variables to test
-		ArrayList<Integer> vars = null;
 		for (int i = 0; i <= variables.length; i++) {
 			// If variable has not be used to split parents, add it to test
 			if (Arrays.asList(t.getParentVars()).contains(i)) {
@@ -79,26 +100,67 @@ public class PTree {
 			}
 		}
 		
-		// Array to store calculated p-values
-		Double[] pvals = new Double[vars.size()];
+		
+		Double[] pvals = new Double[vars.size()];	// Array to store calculated p-values
+		int y = -1;		// value to store each observation's response
+		String x;		// value to store level of variable observed
+		ChiSquareTest chi = new ChiSquareTest();
 		
 		// For each variable, perform chi-squared test
 		for (int var : vars) {
-			// Perform chi squared test for each variable present in data
+			// Gathering levels of the variable
+			ArrayList<String> levels = new ArrayList<String>(Arrays.asList(variables[var]));
+			// Creating contingency table
+			conTab = new long[2][variables[var].length];	// response x variable level
+			// Populating contingency table
+			for (int i : nodeData) {
+				y = response[i];				// Response
+				x = predictors[i][var];		// Level of variable observed
+				conTab[y][levels.indexOf(x)]++;
+			}
+			// Perform chi squared test and store result
+			pvals[var] = chi.chiSquareTest(conTab);
 		}	
 		
 		// Find minimum p-value
-		Double min = Math.findMin(pvals);
+		double minP = Collections.min(Arrays.asList(pvals));
 		
-		// If the p-value is small enough, split on that variable
-//		if (min < 0) {
-//		}
-		// Else, return the node itself
-//		else {
-//		}
-		
-		return null;
+		// If the p-value is small enough at a bonferroni corrected level,
+		// split on that variable
+		if (minP < (0.05 / vars.size())) {
+			return Arrays.asList(minP).indexOf(minP);
+		}
+		// Else, return -1 (no proper variable found)
+		else {
+			return -1;
+		}
 }
+	
+	/**
+	 * Grows the tree from a given node.
+	 * 
+	 * @param t
+	 * @return The grown Node.
+	 */
+	private Node grow(Node t, String[][] predictors, int[] response,
+			String[][] variables, int[] nodeData) {
+		
+		// Find variable to split this node on
+		int var = findVar(t, nodeData, predictors, response, variables);
+		
+		// If the variable split is good enough,
+		if (var >= 0) {
+			// Split node on that variable
+			split(t, var, variables);
+			// Do same on each child TODO
+			for (Node child : t.getChildren()) {
+				grow(child, predictors, response, variables, nodeData);
+			}
+		}
+
+		// Return the 'grown' node
+		return t;
+	}
 	
 	private String[] findInteraction(Node t) {
 		return null;

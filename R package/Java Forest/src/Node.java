@@ -34,4 +34,8 @@ public class Node {
 		return var;
 	}
 	
+	public ArrayList<Node> getChildren() {
+		return this.children;
+	}
+	
 }

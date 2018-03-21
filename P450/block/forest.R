@@ -3,7 +3,7 @@
 
 # Loading Functions
 source("functions/load_protein_data.R")
-source("functions/rf_protein.R")
+source("functions/forest w cutoff.R")
 
 # Loading Data
 original.enzyme = load("P450/block/enzyme.txt")
