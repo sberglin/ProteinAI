@@ -6,24 +6,6 @@ import java.util.ArrayList;
 public class PTree {
 
 	Node root;
-	
-	// TESTING
-	public static void main(String[] args) {
-		
-		// Testing Split Method
-		Node t = new Node(null, null);
-		int var = 1;
-		String[][] variables = { {"1", "2", "3"},
-								 {"1", "2", "3"} };
-		
-		
-//		// Testing Chi-Squared Data
-//		ChiSquareTest x = new ChiSquareTest();
-//		long[][] data = { { 60, 54, 46, 41},
-//				         { 40, 44, 53, 57}  };
-//		double s = x.chiSquare(data);
-//		System.out.println(s);
-	}
 
 	/**
 	 * Constructor for PTree
@@ -41,7 +23,17 @@ public class PTree {
 	 */
 	public PTree(String[][] predictors, int[] response, String[][] variables) {
 		
+		// Create root node
+		root = new Node(null, null);
+		
+		// Creating initial node indices (use the whole data set)
+		ArrayList<Integer> nodeData = new ArrayList<Integer>();
+		for (int i = 0; i < predictors.length; i++) {
+			nodeData.add(i);
+		}
+		
 		// Grow the root node
+		grow(root, predictors, response, variables, nodeData);
 	}
 	
 	/** 
@@ -59,9 +51,8 @@ public class PTree {
 		// Creating Children
 		for (String i : variables[var]) {
 			// Adding new parent variables
-			int[] newParentVars = Arrays.copyOf(t.getParentVars(),
-					t.getParentVars().length + 1);
-			newParentVars[newParentVars.length - 1] = t.getVar();
+			ArrayList<Integer> newParentVars = t.getParentVars();
+			newParentVars.add(0, var);
 			// Adding child
 			children.add(new Node(i, newParentVars));
 		}
@@ -84,7 +75,7 @@ public class PTree {
 	 * @param variables Structure of data
 	 * @return
 	 */
-	private static int findVar(Node t, int[] nodeData, String[][] predictors,
+	private static int findVar(Node t, ArrayList<Integer> nodeData, String[][] predictors,
 			int[] response, String[][] variables) {
 		
 		ArrayList<Integer> vars = new ArrayList<Integer>();	// List of vars to test
@@ -137,24 +128,35 @@ public class PTree {
 }
 	
 	/**
-	 * Grows the tree from a given node.
+	 * Create and grow children for a given node.
 	 * 
 	 * @param t
 	 * @return The grown Node.
 	 */
 	private Node grow(Node t, String[][] predictors, int[] response,
-			String[][] variables, int[] nodeData) {
+			String[][] variables, ArrayList<Integer> nodeData) {
 		
 		// Find variable to split this node on
 		int var = findVar(t, nodeData, predictors, response, variables);
+		
+		// Indices of data to be used in growing each child
+		ArrayList<Integer> childData;
 		
 		// If the variable split is good enough,
 		if (var >= 0) {
 			// Split node on that variable
 			split(t, var, variables);
-			// Do same on each child TODO
+			// Do same on each child
 			for (Node child : t.getChildren()) {
-				grow(child, predictors, response, variables, nodeData);
+				// Finding appropriate indices to be passed to the child
+				childData = new ArrayList<Integer>();
+				for (int i : nodeData) {
+					// If observation i has level of the child, add it to nodeData
+					if (predictors[i][var].equals(child.getLevel())) {
+						childData.add(i);
+					}
+				}
+				grow(child, predictors, response, variables, childData);
 			}
 		}
 
@@ -162,8 +164,18 @@ public class PTree {
 		return t;
 	}
 	
+	/**
+	 * TODO Figure out how this is or should be done
+	 * 
+	 * @param t
+	 * @return
+	 */
 	private String[] findInteraction(Node t) {
 		return null;
+	}
+	
+	public void print(PTree tree) {
+		root.printVerbose(0);
 	}
 }
 
