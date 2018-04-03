@@ -36,8 +36,3 @@ cat("\nError Report (Unpruned data)\n")
 printcp(fit)
 cat("\nError Report (Pruned data)\n")
 printcp(pruned.fit)
-
-
-#### TESTING ####
-structure = pruned.fit$frame
-leaves = structure[which(structure$var == "<leaf>"),]
