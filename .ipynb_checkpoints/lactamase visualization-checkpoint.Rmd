@@ -1,0 +1,69 @@
+---
+title: "Lactamase Visualization"
+author: "Sam Berglin"
+date: "4/19/2019"
+output: html_document
+---
+
+```{r}
+library(readr)
+library(Rtsne)
+library(dplyr)
+library(GGally)
+```
+
+# Reading Data
+
+```{r}
+#### Reading lactamase filtered sequences as data frame ####
+nat.raw = read_csv("Data/lactamase/lactamase_filtered.csv", col_names = F)
+nat = data.frame(do.call(rbind, strsplit(nat.raw$X1, "")))
+rm(nat.raw)
+
+#### Reading positive and negative engineered lactamase sequences ####
+# Reading all engineered sequences
+eng.raw = read_csv("Data/lactamase/lactamase_seqs.csv", col_names = F)
+eng = data.frame(do.call(rbind, strsplit(eng.raw$X1, "")))
+rm(eng.raw)
+# Getting labels
+positives = read_csv("Data/lactamase/lactamase_func.csv", col_names = FALSE)$X1
+positives = as.logical(positives)
+# Splitting engineered to negatvie and positive
+eng.pos = eng[positives, ]
+eng.neg = eng[!positives, ]
+rm(eng, positives)
+
+#### Combining Data ####
+nat.sub = sample_n(nat, size = 2500)
+comb = rbind(eng.pos, eng.neg, nat.sub)
+labels = as.factor(c(rep("Positive", nrow(eng.pos)),
+                     rep("Negative", nrow(eng.neg)),
+                     rep("Natural", nrow(nat.sub))))
+colors = c(rep(1, nrow(eng.pos)), rep(2, nrow(eng.neg)), rep(3, nrow(nat.sub)))
+```
+
+# t-SNE
+
+Explanation
+
+```{r}
+tsne = Rtsne(comb)
+plot(tsne$Y, col = colors, xlab = "", ylab = "", main = "t-SNE")
+legend("bottomleft", col = 1:3, legend = c("Postive", "Negative", "Natural"),
+       lty = 1)
+```
+
+# Parallel Coordinates
+
+```{r}
+comb.group = sample_n(cbind(labels, comb), size = 300)
+alpha.map = c("Natural" = 0.1, "Positive" = 1, "Negative" = 1)
+alphas = alpha.map[as.character(comb.group$labels)]
+alphas.seq = rep(alphas, each = ncol(comb.group) - 1)
+pc = ggparcoord(comb.group, columns = 2:ncol(comb.group), groupColumn = 1,
+                alpha = alphas.seq) + 
+    ggtitle("Parallel Coordinate Plot") + xlab("Position") + 
+    ylab("Amino Acid (Coded)") + labs(color = "Dataset") + 
+    theme(axis.text.x = element_blank(), axis.ticks = element_blank())
+plot(pc)
+```

@@ -1,1 +1,0 @@
-These scripts were used for my own educational purposes. Ignore them!

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="R package/Java Forest/src"/>
+	<classpathentry kind="lib" path="R package/Java Forest/lib/commons-math3-3.6.1.jar"/>
+	<classpathentry kind="lib" path="Weka/weka-3-8-2/remoteExperimentServer.jar"/>
+	<classpathentry kind="lib" path="Weka/weka-3-8-2/weka-src.jar"/>
+	<classpathentry kind="lib" path="Weka/weka-3-8-2/weka.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="R package/Java Forest/bin"/>
+</classpath>
