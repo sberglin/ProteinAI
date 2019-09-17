@@ -1,1 +1,0 @@
-I still need to run "jupyter serverextension enable --py jupyterlab_git" in terminal to enable Git integration.
