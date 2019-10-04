@@ -1,0 +1,2 @@
+- "GPs on Over A Million Data Points" is in `01_Simple_GP_Regression/Simple_MultiGPU_GP_Regression.ipynb`
+- "Doubly Stochastic Variational Inference for Deep Gaussian Processes" is in `13_Deep_Gaussian_Processes/Deep_Gaussian_Processes.ipynb`
