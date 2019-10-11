@@ -18,7 +18,7 @@ def plot_function(ax, train_x, train_y, test_x, observed_pred):
         # Shade between the lower and upper confidence bounds
         ax.fill_between(test_x.numpy(), lower.numpy(), upper.numpy(), alpha=0.5)
         ax.set_ylim([-1, 4])
-        ax.legend(['Observed Data', 'Mean', 'Confidence'])
+        ax.legend(['Observed Data', 'Predicted Mean', 'Confidence'])
         ax.set_xlabel("Chosen Input")
         ax.set_ylabel("Function Value")
         ax.set_title("Fitted Function")
