@@ -2,11 +2,15 @@ import gpytorch
 import torch
 import numpy as np
 
-from gpytorch.kernels import ScaleKernel, RBFKernel, ProductStructureKernel
+from gpytorch.kernels import ScaleKernel, RBFKernel
 from gpytorch.models import ExactGP
 import gpytorch.settings as settings
 from gpytorch.distributions import MultivariateNormal
 from gpytorch.models.exact_prediction_strategies import prediction_strategy
+
+from sgp.kernels import FlexKernel
+
+import pdb
 
 # This is a "stochastic" Gaussian process than can be trained on subsets of the
 # training data, rather than the full training data itself. Can't actually be trained.
@@ -25,8 +29,44 @@ class SGP(ExactGP):
             raise TypeError("No defined mean or covariance function.")
         return gpytorch.distributions.MultivariateNormal(mean_x, covar_x)
         
-    # This method exactly matches the __call__ method of ExactGP, except we don't require
-    # training on all training inputs 
+    # Return the parameters as a dictionary
+    def get_parameters(self, raw = True, show = False):
+        parameters, e = {}, ''
+        for param_name, param, constraint in self.named_parameters_and_constraints():
+            if not raw:
+                param_name = param_name.replace('raw_', '')
+            try:
+                if constraint is not None and not raw:
+                    value = constraint.transform(param)
+                else:
+                    value = param.item()
+                if show:
+                    print(f'   Parameter name: {param_name:42} value = {value}')
+                parameters[param_name] = value
+            except ValueError:
+                print(f'   Parameter name: {param_name:42} shape = {param.data.shape}')
+                for i, raw_value in enumerate(param.data):
+                    if constraint is not None and not raw:
+                        value = constraint.transform(raw_value)
+                    else:
+                        value = raw_value
+                    if show:
+                        print(f'{e:61} value = {value}')
+                    parameters[param_name + '_' + str(i)] = value
+        return parameters
+                
+    def count_parameters(self):
+        i = 0
+        for _, param in self.named_parameters():
+            try:
+                param.item()
+                i += 1
+            except ValueError:
+                for value in param.data:
+                    i += 1
+        return i
+    
+    # This method exactly matches the __call__ method of ExactGP, except we don't require training on all training inputs 
     def __call__(self, *args, **kwargs):
         train_inputs = list(self.train_inputs) if self.train_inputs is not None else []
         inputs = [i.unsqueeze(-1) if i.ndimension() == 1 else i for i in args]
@@ -118,5 +158,5 @@ class FlexSGP(SGP):
     
     def __init__(self, train_x, train_y, likelihood):
         super(SGP, self).__init__(train_x, train_y, likelihood)
-        self.mean_module = gpytorch.means.ConstantMean()
-        self.covar_module = ScaleKernel(ProductStructureKernel(RBFKernel(), num_dims = train_x.shape[1]))  
+        self.mean_module = gpytorch.means.ConstantMean() 
+        self.covar_module = ScaleKernel(FlexKernel(num_dims = train_x.shape[1]))
