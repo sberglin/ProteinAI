@@ -8,8 +8,6 @@ import gpytorch.settings as settings
 from gpytorch.distributions import MultivariateNormal
 from gpytorch.models.exact_prediction_strategies import prediction_strategy
 
-from sgp.kernels import FlexKernel
-
 import pdb
 
 # This is a "stochastic" Gaussian process than can be trained on subsets of the
@@ -29,30 +27,29 @@ class SGP(ExactGP):
             raise TypeError("No defined mean or covariance function.")
         return gpytorch.distributions.MultivariateNormal(mean_x, covar_x)
         
+    # FIXME
     # Return the parameters as a dictionary
     def get_parameters(self, raw = True, show = False):
         parameters, e = {}, ''
         for param_name, param, constraint in self.named_parameters_and_constraints():
+            pdb.set_trace()
             if not raw:
                 param_name = param_name.replace('raw_', '')
-            try:
-                if constraint is not None and not raw:
-                    value = constraint.transform(param)
-                else:
-                    value = param.item()
+            if constraint is not None and not raw:
+                value = constraint.transform(param)
+            else:
+                value = param.item()
+            parameters[param_name] = value
                 if show:
                     print(f'   Parameter name: {param_name:42} value = {value}')
-                parameters[param_name] = value
             except ValueError:
-                print(f'   Parameter name: {param_name:42} shape = {param.data.shape}')
-                for i, raw_value in enumerate(param.data):
-                    if constraint is not None and not raw:
-                        value = constraint.transform(raw_value)
-                    else:
-                        value = raw_value
-                    if show:
-                        print(f'{e:61} value = {value}')
-                    parameters[param_name + '_' + str(i)] = value
+                print("HIT ValueError!")
+#                 for i, raw_value in enumerate(param.data):
+#                     if constraint is not None and not raw:
+#                         value = constraint.transform(raw_value)
+#                     else:
+#                         value = raw_value
+#                     parameters[param_name + '_' + str(i)] = value
         return parameters
                 
     def count_parameters(self):
@@ -159,4 +156,4 @@ class FlexSGP(SGP):
     def __init__(self, train_x, train_y, likelihood):
         super(SGP, self).__init__(train_x, train_y, likelihood)
         self.mean_module = gpytorch.means.ConstantMean() 
-        self.covar_module = ScaleKernel(FlexKernel(num_dims = train_x.shape[1]))
+        self.covar_module = ScaleKernel(RBFKernel(ard_num_dims = train_x.shape[1]))
