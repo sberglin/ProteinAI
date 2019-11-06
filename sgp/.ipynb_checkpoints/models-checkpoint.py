@@ -1,6 +1,7 @@
 import gpytorch
 import torch
 import numpy as np
+import warnings
 
 from gpytorch.kernels import ScaleKernel, RBFKernel
 from gpytorch.models import ExactGP
@@ -27,40 +28,38 @@ class SGP(ExactGP):
             raise TypeError("No defined mean or covariance function.")
         return gpytorch.distributions.MultivariateNormal(mean_x, covar_x)
         
-    # FIXME
     # Return the parameters as a dictionary
-    def get_parameters(self, raw = True, show = False):
-        parameters, e = {}, ''
+    def get_parameters(self, raw = False, show = False):
+        parameters = {}
         for param_name, param, constraint in self.named_parameters_and_constraints():
-            pdb.set_trace()
             if not raw:
                 param_name = param_name.replace('raw_', '')
-            if constraint is not None and not raw:
-                value = constraint.transform(param)
-            else:
-                value = param.item()
-            parameters[param_name] = value
-                if show:
-                    print(f'   Parameter name: {param_name:42} value = {value}')
+            try:
+                if constraint is not None and not raw:
+                    value = constraint.transform(param).item()
+                else:
+                    value = param.item()
+                parameters[param_name] = value
             except ValueError:
-                print("HIT ValueError!")
-#                 for i, raw_value in enumerate(param.data):
-#                     if constraint is not None and not raw:
-#                         value = constraint.transform(raw_value)
-#                     else:
-#                         value = raw_value
-#                     parameters[param_name + '_' + str(i)] = value
+                if constraint is not None and not raw:
+                    value = constraint.transform(param).data[0]
+                else:
+                    value = param.data[0]
+                parameters[param_name] = value
+            if show:
+                print(f'   Parameter name: {param_name:42} value = {value}')
         return parameters
                 
-    def count_parameters(self):
+    def count_parameters(self, raw = False):
         i = 0
-        for _, param in self.named_parameters():
-            try:
-                param.item()
-                i += 1
-            except ValueError:
-                for value in param.data:
+        for param_name, param in self.named_parameters():
+            if param.requires_grad or raw:
+                try:
+                    param.item()
                     i += 1
+                except ValueError:
+                    for value in param.data:
+                        i += 1
         return i
     
     # This method exactly matches the __call__ method of ExactGP, except we don't require training on all training inputs 
@@ -89,12 +88,6 @@ class SGP(ExactGP):
 
         # Posterior mode
         else:
-            if settings.debug.on():
-                if all(torch.equal(train_input, input) for train_input, input in zip(train_inputs, inputs)):
-                    warnings.warn(
-                        "The input matches the stored training data. Did you forget to call model.train()?", UserWarning
-                    )
-
             # Get the terms that only depend on training data
             if self.prediction_strategy is None:
                 train_output = super(ExactGP, self).__call__(*train_inputs, **kwargs)

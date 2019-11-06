@@ -30,12 +30,12 @@ def plot_function(ax, train_x, train_y, test_x, test_y, test_pred):
         mean = test_pred.mean
         # Converting to numpy and ordering
         mean, lower, upper = mean.numpy()[test_o], lower.numpy()[test_o], upper.numpy()[test_o]
-        # Plot training data as black line
-        ax.plot(train_x, train_y, color = 'black')
-        # Plot testing data as red line
-        ax.plot(test_x, test_y, color = 'red')
-        # Plot predictive means as blue line
-        ax.plot(test_x, mean, 'blue')
+        # Plot training data
+        ax.plot(train_x, train_y)
+        # Plot testing data
+        ax.plot(test_x, test_y,)
+        # Plot predictive means
+        ax.plot(test_x, mean)
         # Shade between the lower and upper confidence bounds
         ax.fill_between(test_x, lower, upper, alpha=0.5)
         ax.legend(['Training Data', 'Testing Data', 'Prediction'])
@@ -74,15 +74,28 @@ def plot_parameters(ax, parameters, truths = None):
         try:
             line = ax.plot(range(len(values)), values)[0]
             legend_names.append(name)
+            if truths is not None:
+                try:
+                    if truths[name] is not None:
+                        ax.axhline(truths[name], linestyle = 'dashed', color = line.get_color())
+                        legend_names.append(f'True {name}')
+                except KeyError:
+                    warn(f'No {name} key in "true" parameter dictionary. Skipping its line.')
         except ValueError:
-            print("Did not print. Came across ValueError.")
-        if truths is not None:
-            try:
-                if truths[name] is not None:
-                    ax.axhline(truths[name], linestyle = 'dashed', color = line.get_color())
-                    legend_names.append('True ' + name)
-            except KeyError:
-                warn(f'No {name} key in "true" parameter dictionary. Skipping its line.')
+            # Multiple 'dimensions' in this parameter (ex: separate lengthscales for each dimension)
+            dimensions = range(len(values[0]))
+            reshaped_values = [[epoch[d].item() for epoch in values] for d in dimensions]
+            for d, d_values in enumerate(reshaped_values):
+                d_name = f'{name}_{d}'
+                line = ax.plot(range(len(d_values)), d_values)[0]
+                legend_names.append(d_name)
+                if truths is not None:
+                    try:
+                        if truths[d_name] is not None:
+                            ax.axhline(truths[d_name], linestyle = 'dashed', color = line.get_color())
+                            legend_names.append(f'True {d_name}')
+                    except KeyError:
+                        warn(f'No {d_name} key in "true" parameter dictionary. Skipping its line.')
     ax.legend(legend_names, bbox_to_anchor = (1, 0.75))
     ax.set_title('Parameter Convergence')
     ax.set_ylabel('Value')
