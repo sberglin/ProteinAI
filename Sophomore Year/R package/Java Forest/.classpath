@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/commons-math3-3.6.1.jar" sourcepath="/Users/Sam/Google Drive/Research/Code/R package/Java Forest/lib/commons-math3-3.6.1-src 2.10.38 PM.zip"/>
-	<classpathentry kind="lib" path="lib/weka.jar" sourcepath="/Users/Sam/Google Drive/Research/Code/R package/Java Forest/lib/weka-src.jar"/>
-	<classpathentry kind="lib" path="/Users/Sam/wekafiles/packages/chiSquaredAttributeEval/chiSquaredAttributeEval.jar" sourcepath="/Users/Sam/wekafiles/packages/chiSquaredAttributeEval/src"/>
-	<classpathentry kind="output" path="bin"/>
-</classpath>

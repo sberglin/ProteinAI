@@ -1,0 +1,79 @@
+             GGG   U   U  I  DDDD   EEEE
+            G   G  U   U  I  D   D  E
+            G      U   U  I  D   D  E
+            G  GG  U   U  I  D   D  EEE
+            G   G  U   U  I  D   D  E
+            G   G  U   U  I  D   D  E
+             GGG    UUU   I  DDDD   EEEE
+   
+ GUIDE Classification and Regression Trees and Forests
+ Compiled with NAG Fortran 6.2.0 on Mac OS X Sierra 10.12.6  
+ Version 27.0 (Build date: November 6, 2017)       
+ Copyright (c) 1997-2017 Wei-Yin Loh. All rights reserved.
+ This software is based upon work supported by the U.S. Army Research Office,
+ the National Science Foundation and the National Institutes of Health.
+  
+ This job was started on: 12/18/17 at 14:09
+  
+ Random forest of classification trees
+ with random division of missing values
+ No pruning
+ Data description file: p450.dsc
+ Training sample file: p450.csv
+ Missing value code: NA
+ Records in data file start on line 2
+ Warning: B variables changed to C
+ Dependent variable is Functionality
+ Number of records in data file: 955
+ Length of longest data entry: 1
+ Number of classes: 2
+ Class proportions of dependent variable Functionality:
+ Class      #Cases    Proportion
+ 0             331    0.34659686
+ 1             624    0.65340314
+  
+ Summary information (without x variables)
+ d=dependent, b=split and fit cat variable using 0-1 dummies,
+ c=split-only categorical, n=split and fit numerical, f=fit-only numerical,
+ s=split-only numerical, w=weight
+  Column  Name                          Minimum      Maximum    #Categories       #Missing
+       1  Functionality             d                                     2
+       2  x1                        c                                     3
+       3  x2                        c                                     3
+       4  x3                        c                                     3
+       5  x4                        c                                     3
+       6  x5                        c                                     3
+       7  x6                        c                                     3
+       8  x7                        c                                     3
+       9  x8                        c                                     3
+  
+      Total  #cases w/   #missing
+     #cases    miss. D  ord. vals   #X-var   #N-var   #F-var   #S-var   #B-var   #C-var
+        955          0          0        0        0        0        0        0        8
+ No. cases used for training: 955
+  
+ Univariate split highest priority
+ No interaction and linear splits
+ Number of trees in ensemble: 500
+ Number of variables used for splitting: 3
+ Simple node models
+ Estimated priors
+ Unit misclassification costs
+ Fraction of cases used for splitting each node:  0.10471    
+ Max. number of split levels: 10
+ Min. node sample size: 5
+ Mean number of terminal nodes:    57.77    
+ 
+ Classification matrix for training sample:
+ Predicted       True class
+class              0         1
+ 0                248        57
+ 1                 83       567
+ Total            331       624
+ 
+ Number of cases used for tree construction: 955
+ Number misclassified: 140
+ Resubstitution est. of mean misclassification cost:   0.1466    
+ 
+ Predicted class probabilities are stored in p450_predictions.txt
+ Elapsed time in seconds:    2.4765410

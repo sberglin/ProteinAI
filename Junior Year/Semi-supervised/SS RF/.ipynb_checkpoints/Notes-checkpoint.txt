@@ -1,4 +1,0 @@
-My unsampled indices for labeled random forest' first tree: array([1, 2, 5, 9])
-
-Sklearn's unsampled indices for labeled random forest's first tree:
-array([ 3,  4,  7,  8,  9, 10, 11])
