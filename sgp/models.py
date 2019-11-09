@@ -58,7 +58,7 @@ class SGP(ExactGP):
                     param.item()
                     i += 1
                 except ValueError:
-                    for value in param.data:
+                    for value in param.data[0]:
                         i += 1
         return i
     
