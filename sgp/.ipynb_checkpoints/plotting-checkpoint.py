@@ -62,9 +62,9 @@ def plot_mses(ax, mses, baseline_mse):
     except TypeError:
         raise TypeError("MSEs must have a 'len' function.")
     ax.axhline(baseline_mse, color = 'red')
-    ax.legend(['MSE', 'MSE of Training Mean'])
-    ax.set_title("MSE Progression")
-    ax.set_ylabel("MSE")
+    ax.legend(['Test MSE', 'Test MSE of Training Mean'])
+    ax.set_title("Test MSE Progression")
+    ax.set_ylabel("Test MSE")
     ax.set_xlabel("Iteration")
     return ax
     

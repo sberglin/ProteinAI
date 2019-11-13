@@ -1,0 +1,17 @@
+To-Do
+- Read some papers
+    - "Inference in Deep Gaussian Processes using Stochastic Gradient Hamiltonian Monte Carlo." They have lots of parameters as well, and code available.
+    - Others?
+
+Minor
+- Can we integrate kernel information into the updates nicely? Try to formalize this
+
+11/11 Hours
+11:07am - 
+
+Hao
+- Next meeting on 12/6 instead of 11/29 for Thanksgiving. Last meeting?
+- Stuff I did (in Garvesh's section)
+
+Garvesh
+- I got the higher dimensonal case working. The key was [Fast predictive variances](https://arxiv.org/pdf/1803.06058.pdf). Using the Adam optimizer also helped a bit, and requires less hyperparameters (momentum built in, no need for nesterov correction). The main problem is that the sigma parameter marches upward during training. Perhaps it is sharing some of the signal from the lengthscale. But manually setting it to its proper value and even turning off training dont significantly improve prediction or parameter convergence.
