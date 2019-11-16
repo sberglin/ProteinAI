@@ -1,17 +1,24 @@
 To-Do
-- Read some papers
+- go through papers to find ones that make sense to me.
+- Can we integrate kernel information into the updates nicely? Try to formalize this and read some papers.
     - "Inference in Deep Gaussian Processes using Stochastic Gradient Hamiltonian Monte Carlo." They have lots of parameters as well, and code available.
     - Others?
+- What papers talk about multiple outputs?
+- Read about kernel ridge regression?
 
-Minor
-- Can we integrate kernel information into the updates nicely? Try to formalize this
-
-11/11 Hours
-11:07am - 
+11/16 Hours
+12:24pm - 
 
 Hao
+- I got the higher dimensional case working. The key was [Fast predictive variances](https://arxiv.org/pdf/1803.06058.pdf). Using the Adam optimizer also helped a bit, and requires less hyperparameters (momentum built in, no need for nesterov correction). The main problem is that the sigma parameter marches upward during training. Perhaps it is sharing some of the signal from the lengthscale. But manually setting it to its proper value and even turning off training don't significantly improve prediction or parameter convergence.
+- What move should I take next? I've just been poking through papers.
+- Are we still dealing with multiple outputs? Haven't seen many papers that address this.
 - Next meeting on 12/6 instead of 11/29 for Thanksgiving. Last meeting?
-- Stuff I did (in Garvesh's section)
 
 Garvesh
-- I got the higher dimensonal case working. The key was [Fast predictive variances](https://arxiv.org/pdf/1803.06058.pdf). Using the Adam optimizer also helped a bit, and requires less hyperparameters (momentum built in, no need for nesterov correction). The main problem is that the sigma parameter marches upward during training. Perhaps it is sharing some of the signal from the lengthscale. But manually setting it to its proper value and even turning off training dont significantly improve prediction or parameter convergence.
+
+Time Plan
+11/17 - 11/13: 	9 hours
+11/24 - 11/30: 	4-6 hours
+12/1 - 12/7:	10 hours
+12/8 - 12/11:	4-6 hours
