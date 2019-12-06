@@ -1,9 +1,9 @@
 # To-Do
-- Continue working on Bias notebook. Plot distributions of the differences for each individual parameter and relative distance.
+- Work on Bias vs Parameter values plots. Diagnose what is taking so long
 
-# Today's (12/4) Hours
-9:51am - 9:55am
-9:59am - 
+# Today's (12/6) Hours
+Goal: 135 mins (2.25 hours)
+10:02am - 11:14am 
 
 # Hao
 - This is our last meeting!
